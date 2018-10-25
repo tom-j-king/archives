@@ -30,7 +30,8 @@ public class ConsoleUserInputTest
 	}
 
 	@After
-	public void restoreStreams() {
+	public void restoreStreams() 
+	{
 	    System.setOut(originalOut);
 	    System.setIn(originalIn);
 	    //System.setErr(originalErr);
