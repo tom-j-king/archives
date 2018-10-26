@@ -5,16 +5,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.Reader;
+import java.util.Arrays;
+import java.util.List;
 
 import com.tom.king.archives.UserInputRetriever;
 
+/**
+ * Class that uses console to retrieve details of csv file to update from user
+ * 
+ */
 public class ConsoleUserInputRetriever implements UserInputRetriever<CsvUpdateProperties>
 {	
-	public ConsoleUserInputRetriever()
-    {
-    	//    	
-    }
-	
 	public CsvUpdateProperties retrieveUserInput()
     {
 		final InputStreamReader reader = new InputStreamReader(System.in);
@@ -47,19 +48,26 @@ public class ConsoleUserInputRetriever implements UserInputRetriever<CsvUpdatePr
 			userInputReader.close();
 		} 
 		catch (IOException e) 
-		{
-			// TODO Auto-generated catch block
+		{			
 			e.printStackTrace();
 		}		
 				
 		return updatePropertiesBuilder.build();
 	}
 	
-	public static void printAline() throws IOException
+	public static List<String> printAline(PrintStream out) throws IOException
 	{
+		
+		
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print("Enter file path of file to update: ");
-		input.readLine();
+		out.print("Enter file path of file to update: ");
+		final String s1 = input.readLine();
+		
+		out.print("Enter column name to update: ");
+		final String s2 = input.readLine();
+		
+		
+		return Arrays.asList(s1, s2);
 		//System.out.print("Enter replacement cell value: ");
 	}
 }

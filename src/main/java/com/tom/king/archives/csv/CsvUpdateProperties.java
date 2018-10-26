@@ -1,8 +1,9 @@
 package com.tom.king.archives.csv;
 
-import com.tom.king.archives.UpdateProperties;
-
-public class CsvUpdateProperties implements UpdateProperties
+/**
+ * Immutable Class that holds information on csv file to update and what to update
+ */
+public final class CsvUpdateProperties
 {
 	private String filePath;
     private String cellReplacementText;

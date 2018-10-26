@@ -7,6 +7,9 @@ import com.tom.king.archives.csv.ConsoleUserInputRetriever;
 import com.tom.king.archives.csv.CsvFileUpdater;
 import com.tom.king.archives.csv.CsvUpdateProperties;
 
+/**
+ * Entry point Class for running file update tasks
+ */
 public class UpdaterApp 
 {	
 	public static void updateRunner(final List<FileUpdater> updaterTasks)
