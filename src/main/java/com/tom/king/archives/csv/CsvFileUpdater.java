@@ -17,30 +17,31 @@ import com.tom.king.archives.FileUpdater;
  *
  */
 public class CsvFileUpdater implements FileUpdater
-{  
-    private ConsoleUserInput userInput;
+{   
+    private CsvUpdateProperties updateProperties;    
     	
-	public CsvFileUpdater()
-    {    	
-    	userInput = new ConsoleUserInput();    	
-    }
+	public CsvFileUpdater(final CsvUpdateProperties updateProperties)
+	{
+		this.updateProperties = updateProperties;
+	}
     
     public void runUpdate() 
     {
-		try 
-		{
-			final CsvUpdateProperties updateProperties = userInput.retrieveUserInput();
-			updateFile(updateProperties);
+    	try 
+		{    		
+    		updateFile(updateProperties);
+			System.out.print("File " + updateProperties.getFilePath() + " updated");
 		} 
 		catch (IOException e) 
 		{			
+			System.out.print("File " + updateProperties.getFilePath() + " was not updated\n");
 			e.printStackTrace();
 		}		
 	}   
 
 	public void updateFile(final CsvUpdateProperties updateProperties) throws IOException 
 	{
-		final String fileToUpdate = updateProperties.getFileToUpdate();
+		final String fileToUpdate = updateProperties.getFilePath();
 		final FileReader reader = new FileReader(fileToUpdate);
 						
 		final List<String[]> csvBody = retrieveCsvBody(reader);

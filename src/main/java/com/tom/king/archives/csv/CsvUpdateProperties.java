@@ -1,8 +1,10 @@
 package com.tom.king.archives.csv;
 
-public class CsvUpdateProperties 
+import com.tom.king.archives.UpdateProperties;
+
+public class CsvUpdateProperties implements UpdateProperties
 {
-	private String fileToUpdate;
+	private String filePath;
     private String cellReplacementText;
     private String columnName;
     private int rowNumber;
@@ -11,7 +13,7 @@ public class CsvUpdateProperties
     {
         if (prototype != null)
         {
-            fileToUpdate = prototype.fileToUpdate;
+            filePath = prototype.filePath;
             cellReplacementText = prototype.cellReplacementText;
             columnName = prototype.columnName;
             rowNumber = prototype.rowNumber;            
@@ -28,9 +30,9 @@ public class CsvUpdateProperties
         return new Builder(prototype);
     }
     
-    public String getFileToUpdate()
+    public String getFilePath()
     {
-        return fileToUpdate;
+        return filePath;
     }
 
     public String getCellReplacementText()
@@ -62,9 +64,9 @@ public class CsvUpdateProperties
             return new CsvUpdateProperties(prototype);
         }
 
-        public Builder fileToUpdate(final String value)
+        public Builder filePath(final String value)
         {
-            prototype.fileToUpdate = value;
+            prototype.filePath = value;
             return this;
         }
 

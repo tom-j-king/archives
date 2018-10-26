@@ -1,4 +1,4 @@
-package com.tom.king.archives;
+package com.tom.king.archives.csv;
 
 import static org.junit.Assert.*;
 
@@ -13,12 +13,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.tom.king.archives.csv.ConsoleUserInput;
+import com.tom.king.archives.csv.ConsoleUserInputRetriever;
 
-public class ConsoleUserInputTest 
+public class ConsoleUserInputRetrieverTest 
 {
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-	private final ByteArrayInputStream errContent = new ByteArrayInputStream();
+	//private final ByteArrayInputStream errContent = new ByteArrayInputStream();
 	private final PrintStream originalOut = System.out;
 	private final InputStream originalIn = System.in;
 		
@@ -42,16 +42,16 @@ public class ConsoleUserInputTest
 	{
 		Scanner sc = new Scanner(System.in);
 		
-		ConsoleUserInput.printAline();
-		sc.
+		ConsoleUserInputRetriever.printAline();
+		//sc.
 		
-		assertEquals("hello", outContent.toString());
+		//assertEquals("hello", outContent.toString());
 	}
 	
 	@Test
 	public void testRetrieveUserInput() throws IOException 
 	{
-	    final ConsoleUserInput input = new ConsoleUserInput();
+	    final ConsoleUserInputRetriever input = new ConsoleUserInputRetriever();
 	    input.retrieveUserInput();
 		
 		System.out.print("hello");

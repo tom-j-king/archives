@@ -1,4 +1,4 @@
-package com.tom.king.archives;
+package com.tom.king.archives.csv;
 
 import static org.junit.Assert.assertEquals;
 
@@ -22,7 +22,7 @@ public final class CsvFileUpdaterTest
 {	
 	private CsvFileUpdater updater;	
 	private List<String[]> stubbedCsvBody;
-	private CsvUpdateProperties updateProperties;
+	private CsvUpdateProperties stubbedUpdateProperties;
 	
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	private final PrintStream originalOut = System.out;
@@ -30,17 +30,18 @@ public final class CsvFileUpdaterTest
 	@Before
 	public void setUp() throws IOException
 	{		
-		System.setOut(new PrintStream(outContent));
-		updater = new CsvFileUpdater();
+		System.setOut(new PrintStream(outContent));		
 		createStubbedCsvBody();
 		createStubbedCvsUpdateProperties();
+		
+		updater = new CsvFileUpdater(stubbedUpdateProperties);
 	}
 	
 	@After
 	public void restore() 
 	{
 	    System.setOut(originalOut);	    
-	}
+	}	
 	
 	@Test
 	public void testRetrieveCsvBody() throws IOException
@@ -82,7 +83,7 @@ public final class CsvFileUpdaterTest
 	{				
 		final StringWriter writer = new StringWriter();
 		
-		updater.updateCsvBody(stubbedCsvBody, updateProperties, writer);
+		updater.updateCsvBody(stubbedCsvBody, stubbedUpdateProperties, writer);
 		final String updatedCell = stubbedCsvBody.get(2)[1];
 		
 		assertEquals("London", updatedCell);		
@@ -94,7 +95,7 @@ public final class CsvFileUpdaterTest
 		final CsvUpdateProperties updatePropertiesUnknownHeaderName = CsvUpdateProperties.builder()
 				.cellReplacementText("replacement text")
 				.columnName("XXXX")
-				.fileToUpdate("filePath")
+				.filePath("filePath")
 				.rowNumber("2")
 				.build();
 		
@@ -122,10 +123,10 @@ public final class CsvFileUpdaterTest
 	
 	private void createStubbedCvsUpdateProperties()
 	{
-		updateProperties = CsvUpdateProperties.builder()
+		stubbedUpdateProperties = CsvUpdateProperties.builder()
 				.cellReplacementText("London")
 				.columnName("origin")
-				.fileToUpdate("filePath")
+				.filePath("filePath")
 				.rowNumber("2")
 				.build();
 	}

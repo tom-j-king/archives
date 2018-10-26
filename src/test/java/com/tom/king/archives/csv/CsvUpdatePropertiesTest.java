@@ -1,4 +1,4 @@
-package com.tom.king.archives;
+package com.tom.king.archives.csv;
 
 import static org.junit.Assert.assertEquals;
 
@@ -21,13 +21,13 @@ public class CsvUpdatePropertiesTest
 		final CsvUpdateProperties defaultProperties = CsvUpdateProperties.builder()
 				.cellReplacementText("cell replacement text")
 				.columnName("column name")
-				.fileToUpdate("file to update")
+				.filePath("file to update")
 				.rowNumber("1")
 				.build();
 		
 		assertEquals("cell replacement text", defaultProperties.getCellReplacementText());
 		assertEquals("column name", defaultProperties.getColumnName());
-		assertEquals("file to update", defaultProperties.getFileToUpdate());
+		assertEquals("file to update", defaultProperties.getFilePath());
 		assertEquals(1, defaultProperties.getRowNumber());
 	}
 	
@@ -39,7 +39,7 @@ public class CsvUpdatePropertiesTest
 		
 		assertEquals(null, defaultProperties.getCellReplacementText());
 		assertEquals(null, defaultProperties.getColumnName());
-		assertEquals(null, defaultProperties.getFileToUpdate());
+		assertEquals(null, defaultProperties.getFilePath());
 		assertEquals(0, defaultProperties.getRowNumber());
 	}
 	
@@ -52,7 +52,7 @@ public class CsvUpdatePropertiesTest
 		
 		assertEquals(null, defaultProperties.getCellReplacementText());
 		assertEquals(null, defaultProperties.getColumnName());
-		assertEquals(null, defaultProperties.getFileToUpdate());
+		assertEquals(null, defaultProperties.getFilePath());
 		assertEquals(0, defaultProperties.getRowNumber());
 	}
 	

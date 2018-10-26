@@ -1,6 +1,6 @@
 package com.tom.king.archives;
 
-public interface UserInput<T> 
+public interface UserInputRetriever<T> 
 {
 	public T retrieveUserInput();
 }
