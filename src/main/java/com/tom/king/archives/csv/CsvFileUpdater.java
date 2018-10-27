@@ -25,11 +25,11 @@ public class CsvFileUpdater implements FileUpdater
 		this.updateProperties = updateProperties;
 	}
     
-    public void runUpdate() 
+    public void runUpdate()
     {
     	try 
 		{    		
-    		updateFile(updateProperties);
+    		updateFile();
 			System.out.print("File " + updateProperties.getFilePath() + " updated");
 		} 
 		catch (IOException e) 
@@ -39,7 +39,7 @@ public class CsvFileUpdater implements FileUpdater
 		}		
 	}   
 
-	public void updateFile(final CsvUpdateProperties updateProperties) throws IOException 
+	public void updateFile() throws IOException 
 	{
 		final String fileToUpdate = updateProperties.getFilePath();
 		final FileReader reader = new FileReader(fileToUpdate);

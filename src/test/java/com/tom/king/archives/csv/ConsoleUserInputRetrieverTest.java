@@ -36,16 +36,16 @@ public class ConsoleUserInputRetrieverTest
 	}
 	
 	@Test
-	public void testUpdateProperties()
+	public void testRetrieverUserInputFromConsole()
 	{
-		final ConsoleUserInputRetriever input = new ConsoleUserInputRetriever();
+		final ConsoleUserInputRetriever inputRetriever = new ConsoleUserInputRetriever();
 		
 		final String expectedOutput = "Enter file path of file to update: "
 				+ "Enter row number to update: "
 				+ "Enter column name to update: "
 				+ "Enter replacement cell value: ";
 		
-		final CsvUpdateProperties properties = input.updateProperties(new PrintStream(outContent));
+		final CsvUpdateProperties properties = inputRetriever.retrieveUserInput();
 		assertEquals(expectedOutput, outContent.toString());
 		assertEquals("C:/file/path", properties.getFilePath());
 		assertEquals("column", properties.getColumnName());

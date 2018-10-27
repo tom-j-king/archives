@@ -13,17 +13,15 @@ public class ConsoleUserInputRetriever implements UserInputRetriever<CsvUpdatePr
 {	
 	public CsvUpdateProperties retrieveUserInput()
     {		
-		final PrintStream output = System.out;
-		
-		final CsvUpdateProperties properties = updateProperties(output);
+		final CsvUpdateProperties properties = updateProperties();
 			
 		return properties;		
     }
 	
-	public CsvUpdateProperties updateProperties(final PrintStream output)
+	private CsvUpdateProperties updateProperties()
 	{
 		final CsvUpdateProperties.Builder updatePropertiesBuilder = CsvUpdateProperties.builder();
-		
+		final PrintStream output = System.out;
 		final Scanner scanner = new Scanner(System.in);
 		
 		output.print("Enter file path of file to update: ");

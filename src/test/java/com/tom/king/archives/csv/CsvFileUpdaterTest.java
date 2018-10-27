@@ -20,7 +20,7 @@ import com.tom.king.archives.csv.CsvFileUpdater;
 
 public final class CsvFileUpdaterTest
 {	
-	private CsvFileUpdater updater;	
+	private CsvFileUpdater fileUpdater;	
 	private List<String[]> stubbedCsvBody;
 	private CsvUpdateProperties stubbedUpdateProperties;
 	
@@ -34,21 +34,21 @@ public final class CsvFileUpdaterTest
 		createStubbedCsvBody();
 		createStubbedCvsUpdateProperties();
 		
-		updater = new CsvFileUpdater(stubbedUpdateProperties);
+		fileUpdater = new CsvFileUpdater(stubbedUpdateProperties);
 	}
 	
 	@After
 	public void restore() 
 	{
 	    System.setOut(originalOut);	    
-	}	
+	}
 	
 	@Test
 	public void testRetrieveCsvBody() throws IOException
 	{
 		final Reader reader = new StringReader("filename,origin,metadata,hash\n");
 				
-		final List<String[]> csvBody = updater.retrieveCsvBody(reader);
+		final List<String[]> csvBody = fileUpdater.retrieveCsvBody(reader);
 		assertEquals(1, csvBody.size());
 		
 		final String[] row = csvBody.get(0);
@@ -68,14 +68,14 @@ public final class CsvFileUpdaterTest
 	{
 		final Reader reader = new StringReader("");
 		
-		final List<String[]> csvBody = updater.retrieveCsvBody(reader);
+		final List<String[]> csvBody = fileUpdater.retrieveCsvBody(reader);
 		assertEquals(0, csvBody.size());
 	}
 	
 	@Test(expected = NullPointerException.class)
 	public void testRetrieveCsvBody_nullReader() throws IOException
 	{
-		updater.retrieveCsvBody(null);
+		fileUpdater.retrieveCsvBody(null);
 	}
 	
 	@Test
@@ -83,7 +83,7 @@ public final class CsvFileUpdaterTest
 	{				
 		final StringWriter writer = new StringWriter();
 		
-		updater.updateCsvBody(stubbedCsvBody, stubbedUpdateProperties, writer);
+		fileUpdater.updateCsvBody(stubbedCsvBody, stubbedUpdateProperties, writer);
 		final String updatedCell = stubbedCsvBody.get(2)[1];
 		
 		assertEquals("London", updatedCell);		
@@ -101,7 +101,7 @@ public final class CsvFileUpdaterTest
 		
 		final StringWriter writer = new StringWriter();
 		
-		updater.updateCsvBody(stubbedCsvBody, updatePropertiesUnknownHeaderName, writer);
+		fileUpdater.updateCsvBody(stubbedCsvBody, updatePropertiesUnknownHeaderName, writer);
 		final String updatedCell = stubbedCsvBody.get(2)[1];
 		
 		assertEquals("Londom", updatedCell);
