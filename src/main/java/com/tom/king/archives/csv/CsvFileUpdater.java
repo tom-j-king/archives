@@ -43,11 +43,11 @@ public class CsvFileUpdater implements FileUpdater
 	{
 		final String fileToUpdate = updateProperties.getFilePath();
 		final FileReader reader = new FileReader(fileToUpdate);
-						
+								
 		final List<String[]> csvBody = retrieveCsvBody(reader);
 		final Writer writer = new FileWriter(fileToUpdate);
 		
-		updateCsvBody(csvBody, updateProperties, writer);
+		updateCsvBody(csvBody, writer);
 		reader.close();    		
 	}
 	
@@ -62,8 +62,7 @@ public class CsvFileUpdater implements FileUpdater
 	}
 	
 	public void updateCsvBody(
-			final List<String[]> csvBody, 
-			final CsvUpdateProperties updateProperties,
+			final List<String[]> csvBody,			
 			final Writer writer) throws IOException
 	{
 		final String colToUpdate = updateProperties.getColumnName();

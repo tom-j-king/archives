@@ -83,7 +83,7 @@ public final class CsvFileUpdaterTest
 	{				
 		final StringWriter writer = new StringWriter();
 		
-		fileUpdater.updateCsvBody(stubbedCsvBody, stubbedUpdateProperties, writer);
+		fileUpdater.updateCsvBody(stubbedCsvBody, writer);
 		final String updatedCell = stubbedCsvBody.get(2)[1];
 		
 		assertEquals("London", updatedCell);		
@@ -91,17 +91,19 @@ public final class CsvFileUpdaterTest
 	
 	@Test
 	public void testUpdateCsvBody_unknownHeaderName() throws IOException
-	{
-		final CsvUpdateProperties updatePropertiesUnknownHeaderName = CsvUpdateProperties.builder()
+	{		
+		stubbedUpdateProperties = CsvUpdateProperties.builder()
 				.cellReplacementText("replacement text")
 				.columnName("XXXX")
 				.filePath("filePath")
 				.rowNumber("2")
 				.build();
 		
+		final CsvFileUpdater fileUpdaterUnknownHeader = new CsvFileUpdater(stubbedUpdateProperties);
+		
 		final StringWriter writer = new StringWriter();
 		
-		fileUpdater.updateCsvBody(stubbedCsvBody, updatePropertiesUnknownHeaderName, writer);
+		fileUpdaterUnknownHeader.updateCsvBody(stubbedCsvBody, writer);
 		final String updatedCell = stubbedCsvBody.get(2)[1];
 		
 		assertEquals("Londom", updatedCell);
@@ -113,7 +115,6 @@ public final class CsvFileUpdaterTest
 		final String[] header = {"filename", "origin", "metadata", "hash"};		
 		final String[] row1 = {"file2", "Surrey", "\"a file about The National Archives\"", "hash1"};
 		final String[] row2 = {"file55", "Londom", "\"London was initially incorrectly spelled as Londom\"", "hash2"};
-		
 		
 		stubbedCsvBody = new ArrayList<String[]>();
 		stubbedCsvBody.add(header);
